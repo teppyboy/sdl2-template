@@ -8,7 +8,7 @@ This is a SDL2 template with Image and TTF support made using Meson.
 ## Installation
 
 To use this template, you must have Meson, Ninja, CMake, make, g++/clang++ along with required headers installed.
-If you don't have these installed then you should use MSYS2 to install them (or use vcpkg + MSVC for a better experience)
+If you don't have these installed then you should use MSYS2 to install them (or use https://github.com/justapieop/SDLTesting/tree/dev for a better experience)
 
 ```bash
 git clone https://github.com/teppyboy/sdl2-template
