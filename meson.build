@@ -11,11 +11,15 @@ sdl2_dep = dependency('sdl2')
 sdl2_image_dep = dependency('sdl2_image')
 sdl2_ttf_dep = dependency('sdl2_ttf')
 
+if get_option('buildtype').startswith('debug')
+  add_project_arguments('-DDEBUG', language : 'cpp')
+endif
+
 exe = executable(
   'sdl2-template',
   'src/main.cpp',
   install: true,
-  win_subsystem: 'windows',
+  # win_subsystem: 'windows',
   dependencies: [sdl2_main_dep, sdl2_dep, sdl2_image_dep, sdl2_ttf_dep],
 )
 

@@ -4,18 +4,18 @@
 
 #define DEFAULT_WIDTH 1280
 #define DEFAULT_HEIGHT 720
+#define DEFAULT_FPS 60
 #define WINDOW_NAME "SDL2 Template"
 
 int main(int argc, char *argv[])
 {
-#ifdef NDEBUG
-#else
+#ifdef DEBUG
     SDL_LogSetAllPriority(SDL_LOG_PRIORITY_VERBOSE);
     SDL_LogWarn(0, "This is a debug build and should not be used in production.");
 #endif
     SDL_LogVerbose(0, "Initializing application '%s'...", WINDOW_NAME);
     SDL_Window *window;
-    SDL_Renderer *renderer;
+    SDL_Renderer *renderer = SDL_CreateRenderer(window, 0, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
     SDL_Surface *surface;
     SDL_Event event;
 
@@ -50,9 +50,15 @@ int main(int argc, char *argv[])
     text_rect.w = surface_text->w; // controls the width of the rect
     text_rect.h = surface_text->h; // controls the height of the rect
 
+    SDL_LogVerbose(0, "Target FPS: %d", DEFAULT_FPS);
     SDL_LogVerbose(0, "Begin main loop...");
+    double default_wait = 1000.0f / DEFAULT_FPS;
+    Uint32 max_wait = 1000 / DEFAULT_FPS + 1;
     while (true)
     {
+        // Frame start for FPS limiter
+        Uint64 frame_start = SDL_GetTicks64();
+        // Event handling as normal
         SDL_PollEvent(&event);
         if (event.type == SDL_QUIT)
         {
@@ -67,6 +73,18 @@ int main(int argc, char *argv[])
         text_rect.y -= 110;
         SDL_RenderCopy(renderer, text, NULL, &text_rect);
         SDL_RenderPresent(renderer);
+        // Limit FPS
+        Uint64 frame_end = SDL_GetTicks64();
+        double wait_time = default_wait - (frame_end - frame_start);
+        if (wait_time > max_wait)
+        {
+            wait_time = max_wait;
+        }
+        if (wait_time > 0) {
+            SDL_LogVerbose(0, "Wait time: %f", wait_time);
+            // SDL_LogVerbose(0, "Diff: %d", current_tick - last_tick);
+            SDL_Delay((Uint32)(wait_time));   
+        }
     }
 
     // Cleanup
