@@ -10,6 +10,7 @@ sdl2_main_dep = dependency('sdl2main')
 sdl2_dep = dependency('sdl2')
 sdl2_image_dep = dependency('sdl2_image')
 sdl2_ttf_dep = dependency('sdl2_ttf')
+sdl2_mixer_dep = dependency('sdl2_mixer')
 
 if get_option('buildtype').startswith('debug')
   add_project_arguments('-DDEBUG', language : 'cpp')
@@ -20,7 +21,7 @@ exe = executable(
   'src/main.cpp',
   install: true,
   # win_subsystem: 'windows',
-  dependencies: [sdl2_main_dep, sdl2_dep, sdl2_image_dep, sdl2_ttf_dep],
+  dependencies: [sdl2_main_dep, sdl2_dep, sdl2_image_dep, sdl2_ttf_dep, sdl2_mixer_dep],
 )
 
 test('basic', exe)

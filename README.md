@@ -1,6 +1,6 @@
 # SDL2 Template
 
-This is a SDL2 template with Image and TTF support made using Meson.
+This is a SDL2 template with image, text and music support made using Meson.
 
 ## Preview
 ![The Herta](.github/assets/preview.png "Preview of the template application")
@@ -42,6 +42,7 @@ Because of my university, and no I don't wanna use Code::Blocks. ~~Also plain vc
 ## Acknowledgements
 
 + Background picture: [Honkai: Star Rail 3.0 official illustration.](https://www.reddit.com/r/HonkaiStarRail/comments/1hr4mde/30_official_illustration_hq/)
++ Music: [Hope Is the Thing With Feathers · Robin · HOYO-MiX · Chevy · 王可鑫](https://www.youtube.com/watch?v=aPyt41nnM0k)
 + Font used: [Shizuru](https://fonts.google.com/specimen/Shizuru)
 
 ## License
